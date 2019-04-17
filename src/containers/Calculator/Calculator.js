@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import CalculatorControl from "../../components/CalculatorControl/CalculatorControl";
+import CalculatorOutput from "../../components/CalculatorOutput/CalculatorOutput";
 
 class Calculator extends Component {
     state = {
@@ -23,6 +24,8 @@ class Calculator extends Component {
     render () {
         return (
             <div>
+              <CalculatorOutput value={this.state.result} />
+
               <CalculatorControl id="add" label="+" clicked={() => this.resultClickHandler( 'plus' )} />
               <CalculatorControl id="subtract" label="-" clicked={() => this.resultClickHandler( 'minus' )} />
 
