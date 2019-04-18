@@ -26,6 +26,7 @@ class Calculator extends Component {
 
   numberClick = (event) => {
     let userInput = event.target.value;
+    console.log(userInput, "NUMBER");
     this.setState( ( prevState ) => {
       return { currentInput: prevState.currentInput + userInput }
     });
@@ -48,12 +49,13 @@ class Calculator extends Component {
 
               <CalculatorOutput value={this.state.result} />
 
-              <CalculatorControl myID="add" label="+" clicked={() => this.resultClickHandler( 'plus' )} />
-              <CalculatorControl myID="subtract" label="-" clicked={() => this.resultClickHandler( 'minus' )} />
-              <CalculatorControl myID="multiply" label="x" clicked={this.numberClick} />
-              <CalculatorControl myID="divide" label="/" clicked={this.numberClick} />
-              <CalculatorControl myID="equals" label="=" clicked={() => this.resultClickHandler( 'minus' )} />
-              <CalculatorControl myID="clear" label="CLEAR" clicked={this.clearHandler} />
+              <CalculatorControl opID="add" operator="+" clicked={() => this.resultClickHandler( 'plus' )} />
+              <CalculatorControl opID="subtract" operator="-" clicked={() => this.resultClickHandler( 'minus' )} />
+              <CalculatorControl opID="multiply" operator="x" clicked={this.numberClick} />
+              <CalculatorControl opID="divide" myValue="/" operator="/" clicked={this.numberClick} />
+              <CalculatorControl opID="equals" operator="=" clicked={() => this.resultClickHandler( 'minus' )} />
+              <br />
+              <CalculatorControl opID="clear" operator="CLEAR" clicked={this.clearHandler} />
               <br />
               <CalculatorNumbers numClick={this.numberClick} />
               <br />
