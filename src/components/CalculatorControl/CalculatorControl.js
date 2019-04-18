@@ -2,9 +2,9 @@ import React from 'react';
 import "./CalculatorControl.css";
 
 const calculatorControl = (props) => (
-    <div id={props.myID} className="CalculatorControl" onClick={props.clicked}>
+    <button id={props.myID} value={props.myValue} className="CalculatorControl" onClick={props.clicked}>
         {props.label}
-    </div>
+    </button>
 );
 
 export default calculatorControl;
