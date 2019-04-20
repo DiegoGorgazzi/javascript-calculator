@@ -22,6 +22,8 @@ const calculatorNumbers = (props) => numbers.map((number, index) =>
             key= {index}
             value={number.amount}
             type="button"
+            onClick={props.numClick}
+
           >
             {number.amount}
 
