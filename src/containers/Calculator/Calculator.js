@@ -159,9 +159,9 @@ class Calculator extends Component {
 
 
               <CalculatorControl opID="add" operator="+" clicked={this.numberClick} isDisabled={this.state.operatorDisabled}/>
-              <CalculatorControl opID="subtract" operator="-" clicked={this.numberClick}  />
-              <CalculatorControl opID="multiply" operator="*" clicked={this.numberClick} />
-              <CalculatorControl opID="divide" myValue="/" operator="/" clicked={this.numberClick} />
+              <CalculatorControl opID="subtract" operator="-" clicked={this.numberClick}  isDisabled={this.state.operatorDisabled}/>
+              <CalculatorControl opID="multiply" operator="*" clicked={this.numberClick} isDisabled={this.state.operatorDisabled}/>
+              <CalculatorControl opID="divide" myValue="/" operator="/" clicked={this.numberClick} isDisabled={this.state.operatorDisabled}/>
               <br />
               <CalculatorControl opID="equals" operator="=" clicked={this.equalHandler}  />
               <br />
