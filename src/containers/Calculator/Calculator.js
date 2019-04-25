@@ -106,7 +106,17 @@ class Calculator extends Component {
   }
 
   disableHandler = () => {
-    console.log(this.state.currentInput, "handleChange")
+    let inputLength = this.state.currentInput.length;
+    let userInput = this.state.currentInput;
+    let operators = ["+", "-", "*", "/"];
+    console.log(userInput, "handleChange");
+    console.log(inputLength, "length");
+    console.log(userInput[inputLength-1], "index-1");
+    console.log(userInput[inputLength-2], "index -2");
+    //if length>1,
+      //If, index(length) === 0 AND index(length-1)===(/*-+),
+            //then disable zero.
+    console.log()
     if(this.state.currentInput === "0" ){
       this.setState({
         operatorDisabled: true ,
@@ -114,6 +124,22 @@ class Calculator extends Component {
         decimalDisabled: false
       });
     }
+    else if(inputLength > 1 && userInput[inputLength-1]=== "0" && operators.includes(userInput[inputLength-2])){
+      console.log("else if");
+      this.setState({
+        operatorDisabled: false ,
+        zeroDisabled: true ,
+        decimalDisabled: false
+      });
+    }
+    else {
+      this.setState({
+        operatorDisabled: false ,
+        zeroDisabled: false ,
+        decimalDisabled: false
+      });
+    }
+
   }
 
   componentDidMount() {
