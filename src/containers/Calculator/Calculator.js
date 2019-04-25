@@ -10,7 +10,8 @@ class Calculator extends Component {
         operatorDisabled: false,
         zeroDisabled: false ,
         decimalDisabled: false,
-        numbersDisabled: false
+        numbersDisabled: false,
+        equalPressed: false
     }
 
 
@@ -95,7 +96,8 @@ class Calculator extends Component {
       zeroDisabled: false,
       decimalDisabled: false,
       operatorDisabled: false,
-      numbersDisabled: false
+      numbersDisabled: false,
+      equalPressed: false
     });
   }
 
@@ -104,6 +106,10 @@ class Calculator extends Component {
     //I may have to change this using mathjs library math.eval instead
     let equal = eval(numberfy);
     console.log(equal, "equal");
+    this.setState({
+      result: equal,
+      equalPressed: true
+    });
 
   }
 
@@ -116,10 +122,8 @@ class Calculator extends Component {
     console.log(userInput[inputLength-1], "index-1");
     console.log(userInput[inputLength-2], "index -2");
     console.log(this.state.numbersDisabled, "numbersDisabled");
-    //if length>1,
-      //If, index(length) === 0 AND index(length-1)===(/*-+),
-            //then disable zero.
-    console.log()
+
+    //Prevent operators to be entered when App loads
     if(this.state.currentInput === "0" ){
       this.setState({
         operatorDisabled: true ,
@@ -128,7 +132,12 @@ class Calculator extends Component {
         numbersDisabled: false
       });
     }
-    else if(inputLength > 1 && userInput[inputLength-1]=== "0" && operators.includes(userInput[inputLength-2])){
+    //Prevent more than one zero after operator has been clicked and prevent
+    //any numbers to be enabled (i.e. if a zero is present after an operator,
+    //the only thing a user should to is put a decimal or another operator)
+    else if(inputLength > 1
+      && userInput[inputLength-1]=== "0"
+          && operators.includes(userInput[inputLength-2])){
       console.log("else if");
       this.setState({
         operatorDisabled: false ,
@@ -157,17 +166,25 @@ class Calculator extends Component {
   }
 
     render () {
-      console.log(this.state.numbersDisabled, "numbersDisabled RENDER");
+
+        let inputResult;
+
+        if(this.state.equalPressed) {
+          inputResult = this.state.result;
+        } else {
+          inputResult = this.state.currentInput;
+        }
 
         return (
             <div>
               <div id="display">
-              {this.state.currentInput}
+              {inputResult}
+
 
 
               </div>
+<CalculatorOutput value={this.state.result} />
 
-              <CalculatorOutput value={this.state.result} />
 
 
               <CalculatorControl opID="add" operator="+" clicked={this.numberClick} isDisabled={this.state.operatorDisabled}/>
