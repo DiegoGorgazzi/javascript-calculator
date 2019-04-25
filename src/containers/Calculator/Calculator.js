@@ -6,13 +6,11 @@ import CalculatorNumbers from "../../components/CalculatorNumbers/CalculatorNumb
 class Calculator extends Component {
     state = {
         result: 0,
-        currentInput: 0,
-        zeroDisabled: true,
-        decimalDisabled: false,
-        operatorDisabled: true
+        currentInput: "0",
+        operatorDisabled: false,
+        zeroDisabled: false ,
+        decimalDisabled: false
     }
-
-
 
 
 
@@ -26,8 +24,6 @@ class Calculator extends Component {
             break;
       }
     }
-
-
 
 
     //50 ==> I should be able to put as many ZEROS as I want
@@ -64,71 +60,37 @@ class Calculator extends Component {
             //from (/*-+) to END there should be only ONE "."
               //so if there's a ".", disable it until (/*-+=)
 
-/*
-  componentDidMount = () => {
-    console.log(this.state.currentInput.length, "lengthy")
-    if(this.state.currentInput == 0 && this.state.currentInput.length === undefined ){
-      this.setState({
-        zeroDisabled: true,
-        decimalDisabled: false,
-        operatorDisabled: false
-      });
-    } else {
-    this.setState( ( prevState ) => {
-      return {
-        zeroDisabled: false,
-        decimalDisabled: false,
-        operatorDisabled: false
-      }
-    });
-    }
-  }
-*/
 
   numberClick = (event) => {
     let userInput = event.target.value;
-    /*this.setState( ( prevState ) => {
-      return {
-        currentInput: prevState.currentInput + userInput,
-        zeroDisabled: false,
-        decimalDisabled: false,
-        operatorDisabled: false
+    console.log(this.state.currentInput, "inside");
+    if(this.state.currentInput === "0"){
+      if(userInput === ".") {
+        this.setState( ( prevState ) => {
+          return {
+            currentInput: prevState.currentInput + userInput,
+          }
+        });
       }
-    });
-*/
-
-    if(this.state.currentInput === 0 ){
+      else {
       this.setState({
-        currentInput: userInput,
-        zeroDisabled: false,
-        decimalDisabled: false,
-        operatorDisabled: false
+        currentInput: userInput
       });
+      }
     } else {
     this.setState( ( prevState ) => {
       return {
         currentInput: prevState.currentInput + userInput,
-        zeroDisabled: false,
-        decimalDisabled: false,
-        operatorDisabled: false
       }
     });
-
-  }
-
-    console.log(userInput, "userInput numberClick");
-    console.log(this.state.zeroDisabled, "zeroDisabled numberClick");
-    console.log(this.state.currentInput, "currentInput numberClick");
-    console.log(this.state.currentInput.length, "length")
-    console.log(this.state)
-
+  };
 
   }
 
   clearHandler = () => {
     this.setState({
       result: 0,
-      currentInput: 0,
+      currentInput: "0",
       zeroDisabled: true,
       decimalDisabled: false,
       operatorDisabled: true
@@ -136,7 +98,6 @@ class Calculator extends Component {
   }
 
   equalHandler = () => {
-    console.log(this.state.currentInput, "currentInput equalHandler");
     let numberfy = this.state.currentInput;
     //I may have to change this using mathjs library math.eval instead
     let equal = eval(numberfy);
@@ -144,15 +105,32 @@ class Calculator extends Component {
 
   }
 
+  disableHandler = () => {
+    console.log(this.state.currentInput, "handleChange")
+    if(this.state.currentInput === "0" ){
+      this.setState({
+        operatorDisabled: true ,
+        zeroDisabled: false ,
+        decimalDisabled: false
+      });
+    }
+  }
+
+  componentDidMount() {
+    document.addEventListener("click", this.disableHandler);
+  }
+
+  componentWillUnmount() {
+    document.removeEventListener("click", this.disableHandler);
+  }
 
     render () {
-      //console.log(this.state.currentInput, "currentInput Outside");
-      //console.log(this.state.zeroDisabled, "zeroDisabled Outside");
-      console.log(this.state)
         return (
             <div>
               <div id="display">
-                  {this.state.currentInput}
+              {this.state.currentInput}
+
+
               </div>
 
               <CalculatorOutput value={this.state.result} />
@@ -168,7 +146,7 @@ class Calculator extends Component {
               <CalculatorControl opID="clear" operator="CLEAR" clicked={this.clearHandler} />
               <br />
 
-              <CalculatorNumbers numClick={this.numberClick} isDisabled={this.state.zeroDisabled ? "zero" : this.state.decimalDisabled ? "decimal" : null} />
+              <CalculatorNumbers numClick={this.numberClick} onClick={this.handleChange} isDisabled={this.state.zeroDisabled ? "zero" : this.state.decimalDisabled ? "decimal" : null} />
               <br />
 
 
