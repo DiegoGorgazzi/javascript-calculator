@@ -9,7 +9,8 @@ class Calculator extends Component {
         currentInput: "0",
         operatorDisabled: false,
         zeroDisabled: false ,
-        decimalDisabled: false
+        decimalDisabled: false,
+        numbersDisabled: false
     }
 
 
@@ -91,9 +92,10 @@ class Calculator extends Component {
     this.setState({
       result: 0,
       currentInput: "0",
-      zeroDisabled: true,
+      zeroDisabled: false,
       decimalDisabled: false,
-      operatorDisabled: true
+      operatorDisabled: false,
+      numbersDisabled: false
     });
   }
 
@@ -113,6 +115,7 @@ class Calculator extends Component {
     console.log(inputLength, "length");
     console.log(userInput[inputLength-1], "index-1");
     console.log(userInput[inputLength-2], "index -2");
+    console.log(this.state.numbersDisabled, "numbersDisabled");
     //if length>1,
       //If, index(length) === 0 AND index(length-1)===(/*-+),
             //then disable zero.
@@ -121,7 +124,8 @@ class Calculator extends Component {
       this.setState({
         operatorDisabled: true ,
         zeroDisabled: false ,
-        decimalDisabled: false
+        decimalDisabled: false,
+        numbersDisabled: false
       });
     }
     else if(inputLength > 1 && userInput[inputLength-1]=== "0" && operators.includes(userInput[inputLength-2])){
@@ -129,14 +133,16 @@ class Calculator extends Component {
       this.setState({
         operatorDisabled: false ,
         zeroDisabled: true ,
-        decimalDisabled: false
+        decimalDisabled: false,
+        numbersDisabled: true
       });
     }
     else {
       this.setState({
         operatorDisabled: false ,
         zeroDisabled: false ,
-        decimalDisabled: false
+        decimalDisabled: false,
+        numbersDisabled: false
       });
     }
 
@@ -151,6 +157,8 @@ class Calculator extends Component {
   }
 
     render () {
+      console.log(this.state.numbersDisabled, "numbersDisabled RENDER");
+
         return (
             <div>
               <div id="display">
@@ -172,7 +180,7 @@ class Calculator extends Component {
               <CalculatorControl opID="clear" operator="CLEAR" clicked={this.clearHandler} />
               <br />
 
-              <CalculatorNumbers numClick={this.numberClick} onClick={this.handleChange} isDisabled={this.state.zeroDisabled ? "zero" : this.state.decimalDisabled ? "decimal" : null} />
+              <CalculatorNumbers numClick={this.numberClick} onClick={this.handleChange} isDisabled={this.state.numbersDisabled ? "numbers" : this.state.zeroDisabled ? "zero" : this.state.decimalDisabled ? "decimal" : null} />
               <br />
 
 
