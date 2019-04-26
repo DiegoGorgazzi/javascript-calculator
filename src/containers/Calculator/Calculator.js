@@ -153,7 +153,8 @@ class Calculator extends Component {
         operatorDisabled: false ,
         zeroDisabled: false ,
         decimalDisabled: false,
-        numbersDisabled: false
+        numbersDisabled: false,
+        equalPressed: false
       });
     }
 
