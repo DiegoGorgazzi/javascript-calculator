@@ -5,7 +5,7 @@ import CalculatorNumbers from "../../components/CalculatorNumbers/CalculatorNumb
 
 class Calculator extends Component {
     state = {
-        result: 0,
+        result: "0",
         currentInput: "0",
         operatorDisabled: false,
         zeroDisabled: false ,
@@ -62,6 +62,14 @@ class Calculator extends Component {
             //from (/*-+) to END there should be only ONE "."
               //so if there's a ".", disable it until (/*-+=)
 
+/*
+  componentDidUpdate = () => {
+    /*I need to write a function that checks the last thing typed
+    and compares it the thing typed before and if they are both
+    operators, then delete the first one and leave the last*/
+  //  console.log(this.state.userInput);
+  //}
+
 
   numberClick = (event) => {
     let userInput = event.target.value;
@@ -91,7 +99,7 @@ class Calculator extends Component {
 
   clearHandler = () => {
     this.setState({
-      result: 0,
+      result: "0",
       currentInput: "0",
       zeroDisabled: false,
       decimalDisabled: false,
@@ -148,6 +156,16 @@ class Calculator extends Component {
         numbersDisabled: true
       });
     }
+    /*
+    else if(operators.includes(userInput[inputLength-1])) {
+        this.setState({
+        operatorDisabled: false ,
+        zeroDisabled: false ,
+        decimalDisabled: true,
+        numbersDisabled: false
+      });
+    }
+    */
     else {
       this.setState({
         operatorDisabled: false ,
@@ -162,6 +180,7 @@ class Calculator extends Component {
 
   componentDidMount() {
     document.addEventListener("click", this.disableHandler);
+    this.disableHandler();
   }
 
   componentWillUnmount() {
