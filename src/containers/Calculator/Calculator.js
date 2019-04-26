@@ -107,6 +107,8 @@ class Calculator extends Component {
     let equal = eval(numberfy);
     console.log(equal, "equal");
     this.setState({
+      //set currentInput to equal so user can use any operator on the stored result
+      currentInput: equal,
       result: equal,
       equalPressed: true
     });
@@ -180,9 +182,8 @@ class Calculator extends Component {
               <div id="display">
               {inputResult}
 
-
-
               </div>
+              <div> currentInput: {this.state.currentInput}</div>
 <CalculatorOutput value={this.state.result} />
 
 
