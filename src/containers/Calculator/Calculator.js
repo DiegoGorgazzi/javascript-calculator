@@ -62,13 +62,21 @@ class Calculator extends Component {
             //from (/*-+) to END there should be only ONE "."
               //so if there's a ".", disable it until (/*-+=)
 
-/*
+
   componentDidUpdate = () => {
-    /*I need to write a function that checks the last thing typed
-    and compares it the thing typed before and if they are both
-    operators, then delete the first one and leave the last*/
-  //  console.log(this.state.userInput);
-  //}
+    //Handle double operator inputs
+    console.log(this.state.currentInput, "componentDidUpdate");
+    let inputLength = this.state.currentInput.length;
+    let userInput = this.state.currentInput;
+    let operators = ["+", "-", "*", "/"];
+
+    if (operators.includes(userInput[inputLength-1])
+           && operators.includes(userInput[inputLength-2]) ) {
+      this.setState({
+        currentInput: userInput.slice(0, (inputLength-2)) + userInput.slice(inputLength-1)
+      });
+    }
+  }
 
 
   numberClick = (event) => {
