@@ -41,13 +41,13 @@ class Calculator extends Component {
     // (/*-+)[anyNumber>0] ==> as many zeros
     // (/*-+)[anyNumber][.] ==> as many zeros
 
-    //PREVENTING DUPLICATE ZEROS
+    //PREVENTING DUPLICATE ZEROS ---DONE---
     //if this.state.currentInput === 0, disable /*-+0
     //if length>1,
       //If, index(length) === 0 AND index(length-1)===(/*-+),
             //then disable zero.
 
-    //I ALSO NEED TO PREVENT ++++, ----, ///, ***, ETC, ETC.
+    //I ALSO NEED TO PREVENT ++++, ----, ///, ***, ETC, ETC. ----DONE---
       //if, index(length) === (/*-+.), then disable (/*-+.) AND disable (=)
       //if length === 1 AND index(length) === 0,
           //disable (/*-+.)
@@ -62,6 +62,16 @@ class Calculator extends Component {
             //from (/*-+) to END there should be only ONE "."
               //so if there's a ".", disable it until (/*-+=)
 
+      //I NEED TO DISABLE "=" if there's an operator as the last index...
+
+  componentDidMount() {
+    document.addEventListener("click", this.disableHandler);
+    this.disableHandler();
+  }
+
+  componentWillUnmount() {
+    document.removeEventListener("click", this.disableHandler);
+    }
 
   componentDidUpdate = () => {
     //Handle double operator inputs
@@ -119,7 +129,6 @@ class Calculator extends Component {
 
   equalHandler = () => {
     let numberfy = this.state.currentInput;
-    //I may have to change this using mathjs library math.eval instead
     let equal = eval(numberfy);
     console.log(equal, "equal");
     this.setState({
@@ -164,16 +173,6 @@ class Calculator extends Component {
         numbersDisabled: true
       });
     }
-    /*
-    else if(operators.includes(userInput[inputLength-1])) {
-        this.setState({
-        operatorDisabled: false ,
-        zeroDisabled: false ,
-        decimalDisabled: true,
-        numbersDisabled: false
-      });
-    }
-    */
     else {
       this.setState({
         operatorDisabled: false ,
@@ -186,14 +185,7 @@ class Calculator extends Component {
 
   }
 
-  componentDidMount() {
-    document.addEventListener("click", this.disableHandler);
-    this.disableHandler();
-  }
 
-  componentWillUnmount() {
-    document.removeEventListener("click", this.disableHandler);
-  }
 
     render () {
 
