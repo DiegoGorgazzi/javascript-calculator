@@ -11,7 +11,8 @@ class Calculator extends Component {
         zeroDisabled: false ,
         decimalDisabled: false,
         numbersDisabled: false,
-        equalPressed: false
+        equalPressed: false,
+        equalDisabled: false
     }
 
 
@@ -195,7 +196,8 @@ class Calculator extends Component {
         operatorDisabled: false ,
         zeroDisabled: false ,
         decimalDisabled: false,
-        numbersDisabled: false
+        numbersDisabled: false,
+        equalDisabled: true
       });
     }
     else {
@@ -204,7 +206,8 @@ class Calculator extends Component {
         zeroDisabled: false ,
         //decimalDisabled: true,
         numbersDisabled: false,
-        equalPressed: false
+        equalPressed: false,
+        equalDisabled: false
       });
     }
 
@@ -239,7 +242,7 @@ class Calculator extends Component {
               <CalculatorControl opID="multiply" operator="*" clicked={this.numberClick} isDisabled={this.state.operatorDisabled}/>
               <CalculatorControl opID="divide" myValue="/" operator="/" clicked={this.numberClick} isDisabled={this.state.operatorDisabled}/>
               <br />
-              <CalculatorControl opID="equals" operator="=" clicked={this.equalHandler}  />
+              <CalculatorControl opID="equals" operator="=" clicked={this.equalHandler}  isDisabled={this.state.equalDisabled}/>
               <br />
               <CalculatorControl opID="clear" operator="CLEAR" clicked={this.clearHandler} />
               <br />
