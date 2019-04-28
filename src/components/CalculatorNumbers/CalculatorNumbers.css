@@ -1,6 +1,6 @@
 .CalculatorNumbers {
     width: 80px;
-    padding: 20px;
+    padding: 15px;
     box-sizing: border-box;
     margin: 10px;
     border: 1px solid #eee;
@@ -21,7 +21,7 @@
 
 #zero {
     width: 180px;
-    padding: 20px;
+    padding: 15px;
     box-sizing: border-box;
     margin: 10px;
     border: 1px solid #eee;

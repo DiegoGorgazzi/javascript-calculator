@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import CalculatorControl from "../../components/CalculatorControl/CalculatorControl";
 import CalculatorOutput from "../../components/CalculatorOutput/CalculatorOutput";
 import CalculatorNumbers from "../../components/CalculatorNumbers/CalculatorNumbers";
+import "./Calculator.css"
 
 class Calculator extends Component {
     state = {
@@ -184,7 +185,7 @@ class Calculator extends Component {
               <CalculatorControl opID="multiply" operator="*" clicked={this.numberClick} isDisabled={this.state.operatorDisabled}/>
               <CalculatorControl opID="divide" myValue="/" operator="/" clicked={this.numberClick} isDisabled={this.state.operatorDisabled}/>
               <br />
-          
+
               <CalculatorNumbers numClick={this.numberClick} isDisabled={this.state.numbersDisabled ? "numbers" : this.state.zeroDisabled ? "zero" : this.state.decimalDisabled ? "decimal" : null} />
               <br />
                 <CalculatorControl opID="equals" operator="=" clicked={this.equalHandler}  isDisabled={this.state.equalDisabled}/>

@@ -1,8 +1,8 @@
 .CalculatorControl {
     width: 80px;
-    padding: 20px;
+    padding: 15px;
     box-sizing: border-box;
-    margin: 10px;
+    margin: 9px;
     border: 1px solid #eee;
     box-shadow: 0 2px 2px #ccc;
     font-weight: bold;
@@ -21,7 +21,7 @@
 
 #equals {
   width: 280px;
-  padding: 20px;
+  padding: 15px;
   box-sizing: border-box;
   margin: 10px;
   border: 1px solid #eee;
