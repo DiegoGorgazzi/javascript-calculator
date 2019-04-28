@@ -15,58 +15,6 @@ class Calculator extends Component {
         equalDisabled: false
     }
 
-
-
-  resultClickHandler = (action, value) => {
-      switch (action) {
-        case "plus":
-            this.setState( ( prevState ) => { return { result: prevState.result + 1 } } )
-            break;
-        case "minus":
-            this.setState( ( prevState ) => { return { result: prevState.result - 1 } } )
-            break;
-      }
-    }
-
-
-    //50 ==> I should be able to put as many ZEROS as I want
-    //500 ==> same as above
-    //2.[anyNumber] ==> same as above
-    //3 ==> same as above
-
-    // [nothing] ==> only one zero
-    // (/*-+) ==> only one ZERO
-
-    // [anyNumber>0] ==> as many zeros
-    // [anyNumber][.] ==> as many zeros
-    // (/*-+)[anyNumber>0] ==> as many zeros
-    // (/*-+)[anyNumber][.] ==> as many zeros
-
-    //PREVENTING DUPLICATE ZEROS ---DONE---
-    //if this.state.currentInput === 0, disable /*-+0
-    //if length>1,
-      //If, index(length) === 0 AND index(length-1)===(/*-+),
-            //then disable zero.
-
-    //I ALSO NEED TO PREVENT ++++, ----, ///, ***, ETC, ETC. ----DONE---
-      //if, index(length) === (/*-+.), then disable (/*-+.) AND disable (=)
-      //if length === 1 AND index(length) === 0,
-          //disable (/*-+.)
-
-      //Taking care of Double periods
-          //if "[anyNumber]." then disable "." UNTIL you have (/*-+) again
-                //i.e. if, index(length-1) === ".", disable "."
-                //     if, index(length-1) === "operator", enable "." and disable "="
-          //123.40.0
-            //Between (/*-+) and (/*-+), there should be only ONE ".",
-                //so if there's a ".", disable it until (/*-+=)
-            //from beginning to (/*-+) there should be only ONE "."
-                //so if there's a ".", disable it until (/*-+=)
-            //from (/*-+) to END there should be only ONE "."
-              //so if there's a ".", disable it until (/*-+=)
-
-      //I NEED TO DISABLE "=" if there's an operator as the last index... see taking care of double periods.
-
   componentDidMount() {
     document.addEventListener("click", this.disableHandler);
     this.disableHandler();
@@ -78,7 +26,6 @@ class Calculator extends Component {
 
   componentDidUpdate = () => {
     //Handle double operator inputs
-    console.log(this.state.currentInput, "componentDidUpdate");
     let inputLength = this.state.currentInput.length;
     let userInput = this.state.currentInput;
     let operators = ["+", "-", "*", "/"];
@@ -100,7 +47,6 @@ class Calculator extends Component {
 
   numberClick = (event) => {
     let userInput = event.target.value;
-    console.log(this.state.currentInput, "inside");
     if(this.state.currentInput === "0"){
       if(userInput === ".") {
         this.setState( ( prevState ) => {
@@ -153,11 +99,6 @@ class Calculator extends Component {
     let inputLength = this.state.currentInput.length;
     let userInput = this.state.currentInput;
     let operators = ["+", "-", "*", "/"];
-    console.log(userInput, "handleChange");
-    console.log(inputLength, "length");
-    console.log(userInput[inputLength-1], "index-1");
-    console.log(userInput[inputLength-2], "index -2");
-    console.log(this.state.numbersDisabled, "numbersDisabled");
 
     //Prevent operators to be entered when App loads
     if(this.state.currentInput === "0" ){
@@ -182,11 +123,10 @@ class Calculator extends Component {
         numbersDisabled: true
       });
     }
-    //NOT TRIGGERING ??
+    //Disable multiple decimal periods within same number
     else if(inputLength > 1
       && userInput[inputLength-1]=== "."
           ){
-      console.log("else if Decimal");
       this.setState({
         operatorDisabled: false ,
         zeroDisabled: false ,
@@ -194,10 +134,10 @@ class Calculator extends Component {
         numbersDisabled: false
       });
     }
+    //Disable Equal button if last value in string is an operator
     else if(inputLength > 1
       && operators.includes(userInput[inputLength-1])
           ){
-      console.log("else if Decimal ++");
       this.setState({
         operatorDisabled: false ,
         zeroDisabled: false ,
@@ -210,7 +150,6 @@ class Calculator extends Component {
       this.setState({
         operatorDisabled: false ,
         zeroDisabled: false ,
-        //decimalDisabled: true,
         numbersDisabled: false,
         equalPressed: false,
         equalDisabled: false
@@ -220,10 +159,8 @@ class Calculator extends Component {
   }
 
 
-
     render () {
 
-        console.log(this.state.decimalDisabled, "decimal in render");
         let inputResult;
 
         if(this.state.equalPressed) {
