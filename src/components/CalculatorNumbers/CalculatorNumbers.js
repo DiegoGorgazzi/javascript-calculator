@@ -12,7 +12,6 @@ let numbers = [
   {amount: 8, name: "eight"},
   {amount: 9, name: "nine"},
   {amount: ".", name: "decimal"},
-  {amount: "-/+", name: "negative/positive"}
 ];
 
 const calculatorNumbers = (props) => numbers.map((number, index) =>

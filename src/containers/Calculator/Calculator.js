@@ -89,8 +89,14 @@ class Calculator extends Component {
         currentInput: userInput.slice(0, (inputLength-2)) + userInput.slice(inputLength-1)
       });
     }
-  }
 
+    if (userInput[inputLength-1] === "."
+           && operators.includes(userInput[inputLength-2]) ) {
+      this.setState({
+        currentInput: userInput.slice(0, (inputLength-1)) + "0."
+      });
+    }
+  }
 
   numberClick = (event) => {
     let userInput = event.target.value;
