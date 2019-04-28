@@ -168,31 +168,27 @@ class Calculator extends Component {
         } else {
           inputResult = this.state.currentInput;
         }
-
+        //For some reason, the FCC test just will NOT let me assign the id=display
+        //to my own component so, I guess I'll have to live with this.
         return (
             <div>
               <div id="display">
               {inputResult}
-
               </div>
-              <div> currentInput: {this.state.currentInput}</div>
-<CalculatorOutput value={this.state.result} />
+              <CalculatorOutput value={this.state.result} />
 
-
+              <CalculatorControl opID="clear" operator="CLEAR" clicked={this.clearHandler} />
 
               <CalculatorControl opID="add" operator="+" clicked={this.numberClick} isDisabled={this.state.operatorDisabled}/>
               <CalculatorControl opID="subtract" operator="-" clicked={this.numberClick}  isDisabled={this.state.operatorDisabled}/>
               <CalculatorControl opID="multiply" operator="*" clicked={this.numberClick} isDisabled={this.state.operatorDisabled}/>
               <CalculatorControl opID="divide" myValue="/" operator="/" clicked={this.numberClick} isDisabled={this.state.operatorDisabled}/>
               <br />
-              <CalculatorControl opID="equals" operator="=" clicked={this.equalHandler}  isDisabled={this.state.equalDisabled}/>
-              <br />
-              <CalculatorControl opID="clear" operator="CLEAR" clicked={this.clearHandler} />
-              <br />
-
+          
               <CalculatorNumbers numClick={this.numberClick} isDisabled={this.state.numbersDisabled ? "numbers" : this.state.zeroDisabled ? "zero" : this.state.decimalDisabled ? "decimal" : null} />
               <br />
-
+                <CalculatorControl opID="equals" operator="=" clicked={this.equalHandler}  isDisabled={this.state.equalDisabled}/>
+                <br />
 
             </div>
         );

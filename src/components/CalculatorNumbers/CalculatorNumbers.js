@@ -1,7 +1,9 @@
 import React from "react";
+import "./CalculatorNumbers.css";
 
 let numbers = [
   {amount: 0, name: "zero"},
+  {amount: ".", name: "decimal"},
   {amount: 1, name: "one"},
   {amount: 2, name: "two"},
   {amount: 3, name: "three"},
@@ -11,7 +13,6 @@ let numbers = [
   {amount: 7, name: "seven"},
   {amount: 8, name: "eight"},
   {amount: 9, name: "nine"},
-  {amount: ".", name: "decimal"},
 ];
 
 const calculatorNumbers = (props) => numbers.map((number, index) =>
@@ -22,7 +23,7 @@ const calculatorNumbers = (props) => numbers.map((number, index) =>
             value={number.amount}
             type="button"
             onClick={props.numClick}
-
+            className="CalculatorNumbers"
             disabled={props.isDisabled === "zero" && number.amount === 0 ? true : props.isDisabled === "numbers" && number.amount !=="." ? true : props.isDisabled === "decimal" && number.amount ==="." ? true: false}
           >
             {number.amount}
