@@ -54,6 +54,8 @@ class Calculator extends Component {
 
       //Taking care of Double periods
           //if "[anyNumber]." then disable "." UNTIL you have (/*-+) again
+                //i.e. if, index(length-1) === ".", disable "."
+                //     if, index(length-1) === "operator", enable "." and disable "="
           //123.40.0
             //Between (/*-+) and (/*-+), there should be only ONE ".",
                 //so if there's a ".", disable it until (/*-+=)
@@ -62,7 +64,7 @@ class Calculator extends Component {
             //from (/*-+) to END there should be only ONE "."
               //so if there's a ".", disable it until (/*-+=)
 
-      //I NEED TO DISABLE "=" if there's an operator as the last index...
+      //I NEED TO DISABLE "=" if there's an operator as the last index... see taking care of double periods.
 
   componentDidMount() {
     document.addEventListener("click", this.disableHandler);
@@ -173,11 +175,34 @@ class Calculator extends Component {
         numbersDisabled: true
       });
     }
-    else {
+    //NOT TRIGGERING ??
+    else if(inputLength > 1
+      && userInput[inputLength-1]=== "."
+          ){
+      console.log("else if Decimal");
+      this.setState({
+        operatorDisabled: false ,
+        zeroDisabled: false ,
+        decimalDisabled: true,
+        numbersDisabled: false
+      });
+    }
+    else if(inputLength > 1
+      && operators.includes(userInput[inputLength-1])
+          ){
+      console.log("else if Decimal ++");
       this.setState({
         operatorDisabled: false ,
         zeroDisabled: false ,
         decimalDisabled: false,
+        numbersDisabled: false
+      });
+    }
+    else {
+      this.setState({
+        operatorDisabled: false ,
+        zeroDisabled: false ,
+        //decimalDisabled: true,
         numbersDisabled: false,
         equalPressed: false
       });
@@ -189,6 +214,7 @@ class Calculator extends Component {
 
     render () {
 
+        console.log(this.state.decimalDisabled, "decimal in render");
         let inputResult;
 
         if(this.state.equalPressed) {
@@ -218,7 +244,7 @@ class Calculator extends Component {
               <CalculatorControl opID="clear" operator="CLEAR" clicked={this.clearHandler} />
               <br />
 
-              <CalculatorNumbers numClick={this.numberClick} onClick={this.handleChange} isDisabled={this.state.numbersDisabled ? "numbers" : this.state.zeroDisabled ? "zero" : this.state.decimalDisabled ? "decimal" : null} />
+              <CalculatorNumbers numClick={this.numberClick} isDisabled={this.state.numbersDisabled ? "numbers" : this.state.zeroDisabled ? "zero" : this.state.decimalDisabled ? "decimal" : null} />
               <br />
 
 

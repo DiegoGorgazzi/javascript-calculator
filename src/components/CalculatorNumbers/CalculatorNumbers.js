@@ -24,7 +24,7 @@ const calculatorNumbers = (props) => numbers.map((number, index) =>
             type="button"
             onClick={props.numClick}
 
-            disabled={props.isDisabled === "zero" && number.amount === 0 ? true : props.isDisabled === "numbers" && number.amount !=="." ? true : false}
+            disabled={props.isDisabled === "zero" && number.amount === 0 ? true : props.isDisabled === "numbers" && number.amount !=="." ? true : props.isDisabled === "decimal" && number.amount ==="." ? true: false}
           >
             {number.amount}
 
