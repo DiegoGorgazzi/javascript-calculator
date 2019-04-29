@@ -170,7 +170,9 @@ class Calculator extends Component {
         //to my own component so, I guess I'll have to live with this.
         return (
             <div>
-
+              <div>
+              <p className="appAuthor">A React Calculator App by <a href="https://github.com/DiegoGorgazzi">me</a></p>  
+              </div>
               <div id="display">
               {inputResult}
               </div>
