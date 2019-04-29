@@ -1,21 +1,23 @@
 .CalculatorControl {
-    width: 80px;
+    width: 84px;
     padding: 15px;
     box-sizing: border-box;
-    margin: 9px;
+    margin: 6px;
     border: 1px solid #eee;
-    font-weight: bold;
+    font-weight: 800;
     text-align: center;
     cursor: pointer;
     display: inline-block;
 }
 
-.CalculatorControl:hover {
-    background-color: #eee;
+@media (hover: hover) {
+  .CalculatorControl:hover {
+  background-color: #eee;
+  }
 }
 
 .CalculatorControl:active {
-    font-size: 25px;
+    font-size: 20px;
 }
 
 #equals {
@@ -34,9 +36,9 @@
   width: 180px;
   padding: 15px;
   box-sizing: border-box;
-  margin: 10px;
+  margin: 6px;
   border: 1px solid #ad2d1f;
-  font-weight: bold;
+  font-weight: 800;
   text-align: center;
   cursor: pointer;
   background-color: #f45342;
