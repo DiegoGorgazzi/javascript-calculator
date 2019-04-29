@@ -1,6 +1,5 @@
 import React, { Component } from 'react';
 import CalculatorControl from "../../components/CalculatorControl/CalculatorControl";
-import CalculatorOutput from "../../components/CalculatorOutput/CalculatorOutput";
 import CalculatorNumbers from "../../components/CalculatorNumbers/CalculatorNumbers";
 import "./Calculator.css"
 
@@ -171,7 +170,7 @@ class Calculator extends Component {
         //to my own component so, I guess I'll have to live with this.
         return (
             <div>
-                <CalculatorOutput value={this.state.result} />
+
               <div id="display">
               {inputResult}
               </div>
