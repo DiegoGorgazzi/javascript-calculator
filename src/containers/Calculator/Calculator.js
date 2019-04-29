@@ -86,7 +86,6 @@ class Calculator extends Component {
   equalHandler = () => {
     let numberfy = this.state.currentInput;
     let equal = eval(numberfy);
-    console.log(equal, "equal");
     this.setState({
       //set currentInput to equal so user can use any operator on the stored result
       currentInput: equal,
@@ -116,7 +115,6 @@ class Calculator extends Component {
     else if(inputLength > 1
       && userInput[inputLength-1]=== "0"
           && operators.includes(userInput[inputLength-2])){
-      console.log("else if");
       this.setState({
         operatorDisabled: false ,
         zeroDisabled: true ,

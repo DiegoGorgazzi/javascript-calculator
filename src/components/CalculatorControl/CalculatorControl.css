@@ -4,7 +4,6 @@
     box-sizing: border-box;
     margin: 9px;
     border: 1px solid #eee;
-    box-shadow: 0 2px 2px #ccc;
     font-weight: bold;
     text-align: center;
     cursor: pointer;
@@ -25,9 +24,22 @@
   box-sizing: border-box;
   margin: 10px;
   border: 1px solid #eee;
-  box-shadow: 0 2px 2px #ccc;
+  font-weight: 900;
+  text-align: center;
+  cursor: pointer;
+  background-color: #2a99ed;
+  display: inline-block;
+}
+
+#clear {
+  width: 180px;
+  padding: 15px;
+  box-sizing: border-box;
+  margin: 10px;
+  border: 1px solid #ad2d1f;
   font-weight: bold;
   text-align: center;
   cursor: pointer;
+  background-color: #f45342;
   display: inline-block;
 }

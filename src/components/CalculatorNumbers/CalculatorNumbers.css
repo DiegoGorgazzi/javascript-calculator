@@ -4,7 +4,6 @@
     box-sizing: border-box;
     margin: 10px;
     border: 1px solid #eee;
-    box-shadow: 0 2px 2px #ccc;
     font-weight: bold;
     text-align: center;
     cursor: pointer;
@@ -25,7 +24,6 @@
     box-sizing: border-box;
     margin: 10px;
     border: 1px solid #eee;
-    box-shadow: 0 2px 2px #ccc;
     font-weight: bold;
     text-align: center;
     cursor: pointer;

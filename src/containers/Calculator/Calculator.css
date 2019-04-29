@@ -1,12 +1,13 @@
 #display {
     width: 280px;
-    padding: 15px;
+    padding: 10px;
     box-sizing: border-box;
     margin: 5px;
     border: 1px solid #eee;
-    box-shadow: 0 2px 2px #ccc;
     font-weight: bold;
     text-align: center;
+    background-color: black;
+    color: white;
     cursor: pointer;
     display: inline-block;
 }
