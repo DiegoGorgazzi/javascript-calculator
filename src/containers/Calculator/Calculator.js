@@ -169,9 +169,9 @@ class Calculator extends Component {
         //For some reason, the FCC test just will NOT let me assign the id=display
         //to my own component so, I guess I'll have to live with this.
         return (
-            <div>
+            <div className="Calculator">
               <div>
-              <p className="appAuthor">A React Calculator App by <a href="https://github.com/DiegoGorgazzi">me</a></p>  
+              <p className="appAuthor">A React Calculator App by <a href="https://github.com/DiegoGorgazzi">me</a></p>
               </div>
               <div id="display">
               {inputResult}
@@ -188,8 +188,9 @@ class Calculator extends Component {
 
               <CalculatorNumbers numClick={this.numberClick} isDisabled={this.state.numbersDisabled ? "numbers" : this.state.zeroDisabled ? "zero" : this.state.decimalDisabled ? "decimal" : null} />
               <br />
-                <CalculatorControl opID="equals" operator="=" clicked={this.equalHandler}  isDisabled={this.state.equalDisabled}/>
-                <br />
+
+              <CalculatorControl opID="equals" operator="=" clicked={this.equalHandler}  isDisabled={this.state.equalDisabled}/>
+              <br />
 
             </div>
         );

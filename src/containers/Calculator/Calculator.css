@@ -1,3 +1,8 @@
+.Calculator {
+  max-width: 375px;
+
+}
+
 #display {
     width: 280px;
     padding: 10px;
