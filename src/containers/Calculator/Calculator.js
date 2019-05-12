@@ -1,7 +1,10 @@
 import React, { Component } from 'react';
 import CalculatorControl from "../../components/CalculatorControl/CalculatorControl";
 import CalculatorNumbers from "../../components/CalculatorNumbers/CalculatorNumbers";
-import "./Calculator.css"
+import "./Calculator.css";
+
+import { connect } from "react-redux";
+
 
 class Calculator extends Component {
     state = {
@@ -178,18 +181,50 @@ class Calculator extends Component {
               </div>
 
 
-              <CalculatorControl opID="clear" operator="CLEAR" clicked={this.clearHandler} />
+              <CalculatorControl
+                opID="clear"
+                operator="CLEAR"
+                clicked={this.clearHandler} />
 
-              <CalculatorControl opID="add" operator="+" clicked={this.numberClick} isDisabled={this.state.operatorDisabled}/>
-              <CalculatorControl opID="subtract" operator="-" clicked={this.numberClick}  isDisabled={this.state.operatorDisabled}/>
-              <CalculatorControl opID="multiply" operator="*" clicked={this.numberClick} isDisabled={this.state.operatorDisabled}/>
-              <CalculatorControl opID="divide" myValue="/" operator="/" clicked={this.numberClick} isDisabled={this.state.operatorDisabled}/>
+              <CalculatorControl
+                opID="add"
+                operator="+"
+                clicked={this.numberClick}
+                isDisabled={this.props.operDis}/>
+
+              <CalculatorControl
+                opID="subtract"
+                operator="-"
+                clicked={this.numberClick}
+                isDisabled={this.props.operDis}/>
+
+              <CalculatorControl
+                opID="multiply"
+                operator="*"
+                clicked={this.numberClick}
+                isDisabled={this.props.operDis}/>
+
+              <CalculatorControl
+                opID="divide"
+                myValue="/"
+                operator="/"
+                clicked={this.numberClick}
+                isDisabled={this.props.operDis}/>
               <br />
 
-              <CalculatorNumbers numClick={this.numberClick} isDisabled={this.state.numbersDisabled ? "numbers" : this.state.zeroDisabled ? "zero" : this.state.decimalDisabled ? "decimal" : null} />
+              <CalculatorNumbers
+                numClick={this.numberClick}
+                isDisabled={this.props.numDis ?
+                  "numbers" : this.props.zerDis ?
+                  "zero" : this.props.decDis ?
+                  "decimal" : null} />
               <br />
 
-              <CalculatorControl opID="equals" operator="=" clicked={this.equalHandler}  isDisabled={this.state.equalDisabled}/>
+              <CalculatorControl
+                opID="equals"
+                operator="="
+                clicked={this.equalHandler}
+                isDisabled={this.props.eqDis}/>
               <br />
 
             </div>
@@ -197,4 +232,18 @@ class Calculator extends Component {
     }
 }
 
-export default Calculator;
+const mapStateToProps = state => {
+  return {
+    rst: state.result,
+    curInp: state.currentInput,
+    operDis: state.operatorDisabled,
+    zerDis: state.zeroDisabled,
+    decDis: state.decimalDisabled,
+    numDis: state.numbersDisabled,
+    eqPres: state.equalPressed,
+    eqDis: state.equalDisabled
+  }
+}
+
+
+export default connect(mapStateToProps)(Calculator);
