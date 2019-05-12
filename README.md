@@ -1,4 +1,4 @@
-This is a challenge project from freeCodeCamp (FCC) which consists in building an App from scratch. The App is a drum simulator a.k.a. drum machine.
+This is a challenge project from freeCodeCamp (FCC) which consists in building an App from scratch. The App is a JavaScript React Calculator.
 
 Here's my working version (including the testing suite from FCC):
 https://react-calculator-diego.firebaseapp.com/
