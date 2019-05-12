@@ -6,7 +6,7 @@ https://react-calculator-diego.firebaseapp.com/
 I've included the original text below with instructions on what they want students to accomplish (copied from: https://learn.freecodecamp.org/front-end-libraries/front-end-libraries-projects/build-a-javascript-calculator/).
 
 ### What I did
-* Solved the problem using React following the specs from FCC. You can look at the Redux version in the branch redux-version-origin
+* Solved the problem using React following the specs from FCC. You can look at the Redux version in the branch redux-version
 
 ### Nice to have at some point in the future
 * It'd be nice allow the user to just press the buttons instead of having to click them.
