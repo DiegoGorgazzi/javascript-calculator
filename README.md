@@ -6,14 +6,13 @@ https://react-calculator-diego.firebaseapp.com/
 I've included the original text below with instructions on what they want students to accomplish (copied from: https://learn.freecodecamp.org/front-end-libraries/front-end-libraries-projects/build-a-javascript-calculator/).
 
 ### What I did
-* Solved the problem using React following the specs from FCC.
+* Solved the problem using React following the specs from FCC. You can look at the Redux version in the branch redux-version-origin
 
 ### Nice to have at some point in the future
 * It'd be nice allow the user to just press the buttons instead of having to click them.
 * The negative number and parenthesis are two things I use a lot in real life, so adding those would probably be advantageous
 * Scientific calculator also may be good to have.
 * A backspace functionality would be great to have too.
-* I'd like to use Redux to manage state.
 
 ###  My 2 cents
 This is another project that seemed easy at first but once I realized the mess of different states you have to fiddle with, it quickly made me think maybe this was the perfect project to get my hands dirty with Redux. I decided to finish the App using just React and then I'll do another version using React-Redux. Since the logic (the most difficult part) has been figured out, it seems like refactoring the App using Redux ought to be pretty simple. Famous last words. :smile:
