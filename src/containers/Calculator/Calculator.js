@@ -118,7 +118,8 @@ class Calculator extends Component {
         operatorDisabled: false ,
         zeroDisabled: true ,
         decimalDisabled: false,
-        numbersDisabled: true
+        numbersDisabled: true,
+        equalDisabled: false
       });
     }
     //Disable multiple decimal periods within same number
