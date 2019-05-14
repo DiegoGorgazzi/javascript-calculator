@@ -1,3 +1,5 @@
+import * as actionTypes from "./actionTypes";
+
 const initialState = {
       result: "0",
       currentInput: "0",
@@ -11,7 +13,7 @@ const initialState = {
 
 const reducer = (state = initialState, action) => {
   switch (action.type) {
-    case "CLEAR_HANDLER":
+    case actionTypes.CLEAR_HANDLER:
         return {
           ...state,
             result: "0",
@@ -23,7 +25,7 @@ const reducer = (state = initialState, action) => {
             equalPressed: false
         };
 
-    case "NUMBER_CLICK":
+    case actionTypes.NUMBER_CLICK:
           let userInput = action.e.target.value;
           if(state.currentInput === "0"){
             if(userInput === ".") {
@@ -45,7 +47,7 @@ const reducer = (state = initialState, action) => {
             }
           };
 
-      case "EQUAL_HANDLER":
+      case actionTypes.EQUAL_HANDLER:
           let numberfy = state.currentInput;
           let equal = eval(numberfy);
           return {
@@ -56,7 +58,7 @@ const reducer = (state = initialState, action) => {
             equalPressed: true
           };
 
-      case "DISABLE_HANDLER":
+      case actionTypes.DISABLE_HANDLER:
           let inputLength = state.currentInput.length;
           let userInputs = state.currentInput;
           let operators = ["+", "-", "*", "/"];
@@ -121,7 +123,7 @@ const reducer = (state = initialState, action) => {
             }
           };
 
-      case "DOUBLE_OPERATORS":
+      case actionTypes.DOUBLE_OPERATORS:
           //Handle double operator inputs
           let inputLengths = state.currentInput.length;
           let userInput2 = state.currentInput;
