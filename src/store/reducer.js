@@ -61,7 +61,6 @@ const reducer = (state = initialState, action) => {
 
       if(action.type === "DISABLE_HANDLER") {
         let inputLength = state.currentInput.length;
-        console.log(state.currentInput, "disable handler");
         let userInput = state.currentInput;
         let operators = ["+", "-", "*", "/"];
 
