@@ -7,18 +7,6 @@ import { connect } from "react-redux";
 
 
 class Calculator extends Component {
-    state = {
-        result: "0",
-        currentInput: "0",
-        operatorDisabled: false,
-        zeroDisabled: false ,
-        decimalDisabled: false,
-        numbersDisabled: false,
-        equalPressed: false,
-        equalDisabled: false
-    }
-
-
 
   componentDidMount() {
   document.addEventListener("click", this.props.onDisableHandler);
