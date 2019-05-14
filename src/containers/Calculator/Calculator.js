@@ -18,15 +18,24 @@ class Calculator extends Component {
         equalDisabled: false
     }
 
+
+
   componentDidMount() {
-    document.addEventListener("click", this.disableHandler);
-    this.disableHandler();
+  document.addEventListener("click", this.props.onDisableHandler);
+  this.props.onDisableHandler();
+
+    console.log(this.props.curInp, "componentDidMount");
+    
   }
 
+
+
   componentWillUnmount() {
-    document.removeEventListener("click", this.disableHandler);
+    document.removeEventListener("click",
+    this.props.onDisableHandler);
     }
 
+/*
   componentDidUpdate = () => {
     //Handle double operator inputs
     let inputLength = this.state.currentInput.length;
@@ -47,7 +56,9 @@ class Calculator extends Component {
       });
     }
   }
+*/
 
+/*
   numberClick = (event) => {
     let userInput = event.target.value;
     if(this.state.currentInput === "0"){
@@ -97,6 +108,7 @@ class Calculator extends Component {
 
   }
 
+/*
   disableHandler = () => {
     let inputLength = this.state.currentInput.length;
     let userInput = this.state.currentInput;
@@ -158,23 +170,31 @@ class Calculator extends Component {
     }
 
   }
-
+*/
 
     render () {
 
+        console.log(this.props.curInp, "currentInput RENDER")
+        console.log(this.props.state, "state RENDER")
+
         let inputResult;
 
-        if(this.state.equalPressed) {
-          inputResult = this.state.result;
+        if(this.props.eqPres) {
+          inputResult = this.props.rst;
+          console.log(inputResult, "first IF");
         } else {
-          inputResult = this.state.currentInput;
+          inputResult = this.props.curInp;
+          console.log(inputResult, "second IF");
         }
         //For some reason, the FCC test just will NOT let me assign the id=display
         //to my own component so, I guess I'll have to live with this.
         return (
             <div className="Calculator">
               <div>
-              <p className="appAuthor">A React Calculator App by <a href="https://github.com/DiegoGorgazzi">me</a></p>
+                <p className="appAuthor">
+                  A React Calculator App by
+                  <a href="https://github.com/DiegoGorgazzi"> me</a>
+                </p>
               </div>
               <div id="display">
               {inputResult}
@@ -184,36 +204,36 @@ class Calculator extends Component {
               <CalculatorControl
                 opID="clear"
                 operator="CLEAR"
-                clicked={this.clearHandler} />
+                clicked={this.props.onClearHandler} />
 
               <CalculatorControl
                 opID="add"
                 operator="+"
-                clicked={this.numberClick}
+                clicked={this.props.onNumberClick}
                 isDisabled={this.props.operDis}/>
 
               <CalculatorControl
                 opID="subtract"
                 operator="-"
-                clicked={this.numberClick}
+                clicked={this.props.onNumberClick}
                 isDisabled={this.props.operDis}/>
 
               <CalculatorControl
                 opID="multiply"
                 operator="*"
-                clicked={this.numberClick}
+                clicked={this.props.onNumberClick}
                 isDisabled={this.props.operDis}/>
 
               <CalculatorControl
                 opID="divide"
                 myValue="/"
                 operator="/"
-                clicked={this.numberClick}
+                clicked={this.props.onNumberClick}
                 isDisabled={this.props.operDis}/>
               <br />
 
               <CalculatorNumbers
-                numClick={this.numberClick}
+                numClick={this.props.onNumberClick}
                 isDisabled={this.props.numDis ?
                   "numbers" : this.props.zerDis ?
                   "zero" : this.props.decDis ?
@@ -223,7 +243,7 @@ class Calculator extends Component {
               <CalculatorControl
                 opID="equals"
                 operator="="
-                clicked={this.equalHandler}
+                clicked={this.props.onEqualHandler}
                 isDisabled={this.props.eqDis}/>
               <br />
 
@@ -245,5 +265,18 @@ const mapStateToProps = state => {
   }
 }
 
+const mapDispatchToProps = dispatch => {
+  return {
+    //if you assign this property to anything, it will execute the function
+    onClearHandler: () => dispatch({type: "CLEAR_HANDLER"}),
+    onNumberClick: (event) => dispatch({type:"NUMBER_CLICK", e:event}),
+    onEqualHandler: () => dispatch({type: "EQUAL_HANDLER"}),
+    onDisableHandler: () => dispatch({type: "DISABLE_HANDLER"})
+  };
+};
 
-export default connect(mapStateToProps)(Calculator);
+
+
+
+
+export default connect(mapStateToProps, mapDispatchToProps)(Calculator);
