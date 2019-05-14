@@ -128,6 +128,29 @@ const reducer = (state = initialState, action) => {
 
     };
 
+    if(action.type === "DOUBLE_OPERATORS") {
+      //Handle double operator inputs
+      let inputLength = state.currentInput.length;
+      let userInput = state.currentInput;
+      let operators = ["+", "-", "*", "/"];
+
+      if (operators.includes(userInput[inputLength-1])
+             && operators.includes(userInput[inputLength-2]) ) {
+        return {
+          ...state,
+          currentInput: userInput.slice(0, (inputLength-2)) + userInput.slice(inputLength-1)
+        }
+      }
+
+      if (userInput[inputLength-1] === "."
+             && operators.includes(userInput[inputLength-2]) ) {
+        return {
+          ...state,
+          currentInput: userInput.slice(0, (inputLength-1)) + "0."
+        }
+      }
+    };
+
     return state;
 };
 
