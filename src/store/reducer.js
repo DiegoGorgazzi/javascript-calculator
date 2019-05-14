@@ -10,145 +10,141 @@ const initialState = {
 }
 
 const reducer = (state = initialState, action) => {
-  if(action.type === "CLEAR_HANDLER") {
-    return {
-      ...state,
-        result: "0",
-        currentInput: "0",
-        zeroDisabled: false,
-        decimalDisabled: false,
-        operatorDisabled: false,
-        numbersDisabled: false,
-        equalPressed: false
-    }
-  }
+  switch (action.type) {
+    case "CLEAR_HANDLER":
+        return {
+          ...state,
+            result: "0",
+            currentInput: "0",
+            zeroDisabled: false,
+            decimalDisabled: false,
+            operatorDisabled: false,
+            numbersDisabled: false,
+            equalPressed: false
+        };
 
-  if(action.type === "NUMBER_CLICK") {
-      let userInput = action.e.target.value;
-      if(state.currentInput === "0"){
-        if(userInput === ".") {
+    case "NUMBER_CLICK":
+          let userInput = action.e.target.value;
+          if(state.currentInput === "0"){
+            if(userInput === ".") {
+                return {
+                  ...state,
+                  currentInput: state.currentInput + userInput,
+                }
+            }
+            else {
+              return {
+                ...state,
+              currentInput: userInput
+              }
+            }
+          } else {
             return {
               ...state,
               currentInput: state.currentInput + userInput,
             }
-        }
-        else {
+          };
+
+      case "EQUAL_HANDLER":
+          let numberfy = state.currentInput;
+          let equal = eval(numberfy);
           return {
+            //set currentInput to equal so user can use any operator on the stored result
             ...state,
-          currentInput: userInput
+            currentInput: equal,
+            result: equal,
+            equalPressed: true
+          };
+
+      case "DISABLE_HANDLER":
+          let inputLength = state.currentInput.length;
+          let userInputs = state.currentInput;
+          let operators = ["+", "-", "*", "/"];
+
+          //Prevent operators to be entered when App loads
+          if(state.currentInput === "0" ){
+            return {
+              ...state,
+              operatorDisabled: true ,
+              zeroDisabled: false ,
+              decimalDisabled: false,
+              numbersDisabled: false
+            }
           }
-        }
-      } else {
-        return {
-          ...state,
-          currentInput: state.currentInput + userInput,
-        }
-    };
-  }
-
-    if(action.type === "EQUAL_HANDLER") {
-        let numberfy = state.currentInput;
-        let equal = eval(numberfy);
-        return {
-          //set currentInput to equal so user can use any operator on the stored result
-          ...state,
-          currentInput: equal,
-          result: equal,
-          equalPressed: true
-        }
-
-      };
-
-      if(action.type === "DISABLE_HANDLER") {
-        let inputLength = state.currentInput.length;
-        let userInput = state.currentInput;
-        let operators = ["+", "-", "*", "/"];
-
-        //Prevent operators to be entered when App loads
-        if(state.currentInput === "0" ){
-          return {
-            ...state,
-            operatorDisabled: true ,
-            zeroDisabled: false ,
-            decimalDisabled: false,
-            numbersDisabled: false
+          //Prevent more than one zero after operator has been clicked and prevent
+          //any numbers to be enabled (i.e. if a zero is present after an operator,
+          //the only thing a user should do is put a decimal or another operator)
+          else if(inputLength > 1
+            && userInputs[inputLength-1]=== "0"
+                && operators.includes(userInputs[inputLength-2])){
+            return {
+              ...state,
+              operatorDisabled: false ,
+              zeroDisabled: true ,
+              decimalDisabled: false,
+              numbersDisabled: true
+            }
           }
-        }
-        //Prevent more than one zero after operator has been clicked and prevent
-        //any numbers to be enabled (i.e. if a zero is present after an operator,
-        //the only thing a user should do is put a decimal or another operator)
-        else if(inputLength > 1
-          && userInput[inputLength-1]=== "0"
-              && operators.includes(userInput[inputLength-2])){
-          return {
-            ...state,
-            operatorDisabled: false ,
-            zeroDisabled: true ,
-            decimalDisabled: false,
-            numbersDisabled: true
+          //Disable multiple decimal periods within same number
+          else if(inputLength > 1
+            && userInputs[inputLength-1]=== "."
+                ){
+            return {
+              ...state,
+              operatorDisabled: false ,
+              zeroDisabled: false ,
+              decimalDisabled: true,
+              numbersDisabled: false
+            }
           }
-        }
-        //Disable multiple decimal periods within same number
-        else if(inputLength > 1
-          && userInput[inputLength-1]=== "."
-              ){
-          return {
-            ...state,
-            operatorDisabled: false ,
-            zeroDisabled: false ,
-            decimalDisabled: true,
-            numbersDisabled: false
+          //Disable Equal button if last value in string is an operator
+          else if(inputLength > 1
+            && operators.includes(userInputs[inputLength-1])
+                ){
+            return {
+              ...state,
+              operatorDisabled: false ,
+              zeroDisabled: false ,
+              decimalDisabled: false,
+              numbersDisabled: false,
+              equalDisabled: true
+            }
           }
-        }
-        //Disable Equal button if last value in string is an operator
-        else if(inputLength > 1
-          && operators.includes(userInput[inputLength-1])
-              ){
-          return {
-            ...state,
-            operatorDisabled: false ,
-            zeroDisabled: false ,
-            decimalDisabled: false,
-            numbersDisabled: false,
-            equalDisabled: true
+          else {
+            return {
+              ...state,
+              operatorDisabled: false ,
+              zeroDisabled: false ,
+              numbersDisabled: false,
+              equalPressed: false,
+              equalDisabled: false
+            }
+          };
+
+      case "DOUBLE_OPERATORS":
+          //Handle double operator inputs
+          let inputLengths = state.currentInput.length;
+          let userInput2 = state.currentInput;
+          let operators2 = ["+", "-", "*", "/"];
+
+          if (operators2.includes(userInput2[inputLengths-1])
+                 && operators2.includes(userInput2[inputLengths-2]) ) {
+            return {
+              ...state,
+              currentInput: userInput2.slice(0, (inputLengths-2)) + userInput2.slice(inputLengths-1)
+            }
           }
-        }
-        else {
-          return {
-            ...state,
-            operatorDisabled: false ,
-            zeroDisabled: false ,
-            numbersDisabled: false,
-            equalPressed: false,
-            equalDisabled: false
-          }
-        }
+
+          if (userInput2[inputLengths-1] === "."
+                 && operators2.includes(userInput2[inputLengths-2]) ) {
+            return {
+              ...state,
+              currentInput: userInput2.slice(0, (inputLengths-1)) + "0."
+            }
+          };
 
 
-    };
-
-    if(action.type === "DOUBLE_OPERATORS") {
-      //Handle double operator inputs
-      let inputLength = state.currentInput.length;
-      let userInput = state.currentInput;
-      let operators = ["+", "-", "*", "/"];
-
-      if (operators.includes(userInput[inputLength-1])
-             && operators.includes(userInput[inputLength-2]) ) {
-        return {
-          ...state,
-          currentInput: userInput.slice(0, (inputLength-2)) + userInput.slice(inputLength-1)
-        }
-      }
-
-      if (userInput[inputLength-1] === "."
-             && operators.includes(userInput[inputLength-2]) ) {
-        return {
-          ...state,
-          currentInput: userInput.slice(0, (inputLength-1)) + "0."
-        }
-      }
-    };
+    }
 
     return state;
 };
